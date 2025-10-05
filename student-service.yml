@@ -42,5 +42,5 @@ resilience4j:
     instances:
       courseService:
         maxAttempts: 3
-        waitDuration: 1000ms
+        waitDuration: 1000
         enableExponentialBackoff: true
