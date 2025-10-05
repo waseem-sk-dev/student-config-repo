@@ -2,8 +2,6 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: STUDENT-SERVICE
   datasource:
     url: jdbc:mysql://localhost:3306/studentMicro_db?createDatabaseIfNotExist=true
     username: root
@@ -27,3 +25,22 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+      
+resilience4j:
+  circuitbreaker:
+    instances:
+      courseService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+
+  retry:
+    instances:
+      courseService:
+        maxAttempts: 3
+        waitDuration: 1000ms
+        enableExponentialBackoff: true
