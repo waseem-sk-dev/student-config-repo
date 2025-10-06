@@ -27,14 +27,46 @@ spring:
                 name: courseCircuitBreaker
                 fallbackUri: forward:/fallback/courses
 
+  application:
+    name: gateway-service  # Recommended: Set an application name for Eureka registration
 
 management:
   endpoints:
     web:
       exposure:
         include: gateway,health,info
+      base-path: /actuator
+  endpoint:
+    gateway:
+      enabled: true
+
+resilience4j:  # Added for CircuitBreaker configuration (required for functionality)
+  circuitbreaker:
+    instances:
+      studentCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2s
+      courseCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2s
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true  # Recommended: Explicitly enable registration
+    fetch-registry: true  # Recommended: Explicitly enable fetching registry
+  instance:
+    prefer-ip-address: true  # Recommended for containerized environments
