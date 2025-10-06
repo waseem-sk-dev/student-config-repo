@@ -10,6 +10,7 @@ spring:
           predicates:
             - Path=/api/students/**
           filters:
+            - StripPrefix=1
             - name: CircuitBreaker
               args:
                 name: studentCircuitBreaker
@@ -20,16 +21,18 @@ spring:
           predicates:
             - Path=/api/courses/**
           filters:
+            - StripPrefix=1
             - name: CircuitBreaker
               args:
                 name: courseCircuitBreaker
                 fallbackUri: forward:/fallback/courses
 
+
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: gateway,health,info
 
 eureka:
   client:
