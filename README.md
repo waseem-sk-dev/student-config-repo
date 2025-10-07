@@ -65,68 +65,85 @@ Each file holds configuration for its respective service and environment.
 
 ## 🧠 Example `application.properties`
 
-```properties
-server.port=8888
-spring.application.name=student-config-server
-
-# Your config Git repository
-spring.cloud.config.server.git.uri=https://github.com/YOUR_GITHUB_USERNAME/student-config-repo
-spring.cloud.config.server.git.clone-on-start=true
-
-🚀 Running the Application
-🖥️ Using Maven
-mvn clean install
-mvn spring-boot:run
-The server will start on port 8888.
-
-🔍 Testing the Configuration Endpoint
-
-Once the Config Server is running, verify it by accessing:
-http://localhost:8888/student-service/dev
-
-You should see a JSON response containing configuration details for the student-service.
-
-Example output:
-{
-  "name": "student-service",
-  "profiles": ["dev"],
-  "propertySources": [
-    {
-      "name": "https://github.com/YOUR_GITHUB_USERNAME/student-config-repo/student-service-dev.properties",
-      "source": {
-        "server.port": "8082",
-        "spring.datasource.url": "jdbc:mysql://localhost:3306/student_db"
-      }
-    }
-  ]
-}
-
-📦 Project Structure
-student-config-server/
-├── src/
-│   ├── main/
-│   │   ├── java/com/student/configserver
-│   │   │   └── StudentConfigServerApplication.java
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/
-├── pom.xml
-└── README.md
-
-🤝 Contributing
-
-Contributions are welcome!
-If you’d like to improve configuration management, add documentation, or extend environments, feel free to open a PR.
-
-👨‍💻 Author
-
-Waseem Shaikh
-Backend Developer – Java | Spring Boot | Microservices
-GitHub: @waseem-sk-dev
-
-🪪 License
-
-This project is licensed under the MIT License – see the LICENSE
- file for details.
+> ```properties
+> server.port=8888
+> spring.application.name=student-config-server
+>
+> # Your config Git repository
+> spring.cloud.config.server.git.uri=https://github.com/YOUR_GITHUB_USERNAME/student-config-repo
+> spring.cloud.config.server.git.clone-on-start=true
+> ```
 
 ---
+
+## 🚀 Running the Application
+
+> **Using Maven**
+> ```bash
+> mvn clean install
+> mvn spring-boot:run
+> ```
+> The server will start on **port 8888**.
+
+---
+
+## 🔍 Testing the Configuration Endpoint
+
+> Once the Config Server is running, verify it by accessing:  
+> `http://localhost:8888/student-service/dev`
+>
+> You should see a JSON response containing configuration details:
+>
+> ```json
+> {
+>   "name": "student-service",
+>   "profiles": ["dev"],
+>   "propertySources": [
+>     {
+>       "name": "https://github.com/YOUR_GITHUB_USERNAME/student-config-repo/student-service-dev.properties",
+>       "source": {
+>         "server.port": "8082",
+>         "spring.datasource.url": "jdbc:mysql://localhost:3306/student_db"
+>       }
+>     }
+>   ]
+> }
+> ```
+
+---
+
+## 📦 Project Structure
+
+> ```
+> student-config-server/
+> ├── src/
+> │   ├── main/
+> │   │   ├── java/com/student/configserver
+> │   │   │   └── StudentConfigServerApplication.java
+> │   │   └── resources/
+> │   │       └── application.properties
+> │   └── test/
+> ├── pom.xml
+> └── README.md
+> ```
+
+---
+
+## 🤝 Contributing
+
+> Contributions are welcome!  
+> If you’d like to improve configuration management, add documentation, or extend environments, feel free to open a PR.
+
+---
+
+## 👨‍💻 Author
+
+> **Waseem Shaikh**  
+> Backend Developer – Java | Spring Boot | Microservices  
+> GitHub: [@waseem-sk-dev](https://github.com/waseem-sk-dev)
+
+---
+
+## 🪪 License
+
+> This project is licensed under the **MIT License** – see the LICENSE file for details.
