@@ -49,12 +49,14 @@ This service provides a **central source of truth** for configuration data used 
 
 Create a separate GitHub repository (e.g., `student-config-repo`) to store configuration files for all environments.
 
-Example structure:
-student-config-repo/
-├── student-api-gateway-dev.properties
-├── student-eureka-server-dev.properties
-├── student-course-service-dev.properties
-└── student-service-dev.properties
+**Example structure:**
+
+- `student-config-repo/`
+  - `student-api-gateway-dev.properties`
+  - `student-eureka-server-dev.properties`
+  - `student-course-service-dev.properties`
+  - `student-service-dev.properties`
+
 
 
 Each file holds configuration for its respective service and environment.
