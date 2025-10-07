@@ -23,17 +23,12 @@ This service provides a **central source of truth** for configuration data used 
 
 ## 🏗️ Architecture Overview
 
-+------------------------+
-| student-config-server |
-| (Port: 8888) |
-+----------+-------------+
-|
-↓
-+----------+-------------+
-| Other microservices |
-| fetch their configs |
-| from Config Server |
-+------------------------+
+- **student-config-server**  
+  - Port: 8888
+
+- **Other Microservices**  
+  - Fetch their configs from Config Server
+
 
 
 ---
