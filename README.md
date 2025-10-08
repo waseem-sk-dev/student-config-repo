@@ -682,7 +682,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 **Backend Developer** | Java • Spring Boot • Microservices
 
 [![GitHub](https://img.shields.io/badge/GitHub-waseem--sk--dev-181717?style=for-the-badge&logo=github)](https://github.com/waseem-sk-dev)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/waseem-sk-dev)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/waseemyousuf/)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:waseem@example.com)
 
 </div>
