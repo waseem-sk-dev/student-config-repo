@@ -2,34 +2,47 @@ server:
   port: 8765
 
 spring:
+  application:
+    name: api-gateway  # Registers as "api-gateway" in Eureka
   cloud:
     gateway:
       routes:
+        # =============================
+        # Student Service Route
+        # =============================
         - id: student-service
-          uri: lb://STUDENT-SERVICE
+          uri: lb://student-service
           predicates:
             - Path=/api/students/**
           filters:
-            - StripPrefix=1
             - name: CircuitBreaker
               args:
                 name: studentCircuitBreaker
                 fallbackUri: forward:/fallback/students
 
+        # =============================
+        # Course Service Route
+        # =============================
         - id: course-service
-          uri: lb://COURSE-SERVICE
+          uri: lb://course-service
           predicates:
             - Path=/api/courses/**
           filters:
-            - StripPrefix=1
             - name: CircuitBreaker
               args:
                 name: courseCircuitBreaker
                 fallbackUri: forward:/fallback/courses
 
-  application:
-    name: gateway-service  # Recommended: Set an application name for Eureka registration
+      # =============================
+      # Discovery Locator Configuration
+      # =============================
+      discovery:
+        locator:
+          enabled: false  # Keep false since explicit routes are defined
 
+# =============================
+# Management & Actuator
+# =============================
 management:
   endpoints:
     web:
@@ -40,7 +53,10 @@ management:
     gateway:
       enabled: true
 
-resilience4j:  # Added for CircuitBreaker configuration (required for functionality)
+# =============================
+# Resilience4j Circuit Breaker Config
+# =============================
+resilience4j:
   circuitbreaker:
     instances:
       studentCircuitBreaker:
@@ -52,6 +68,7 @@ resilience4j:  # Added for CircuitBreaker configuration (required for functional
         failureRateThreshold: 50
         slowCallRateThreshold: 50
         slowCallDurationThreshold: 2s
+
       courseCircuitBreaker:
         registerHealthIndicator: true
         slidingWindowSize: 10
@@ -62,11 +79,14 @@ resilience4j:  # Added for CircuitBreaker configuration (required for functional
         slowCallRateThreshold: 50
         slowCallDurationThreshold: 2s
 
+# =============================
+# Eureka Client Configuration
+# =============================
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true  # Recommended: Explicitly enable registration
-    fetch-registry: true  # Recommended: Explicitly enable fetching registry
+    register-with-eureka: true
+    fetch-registry: true
   instance:
     prefer-ip-address: true  # Recommended for containerized environments

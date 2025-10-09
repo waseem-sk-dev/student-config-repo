@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: student-service  
   datasource:
     url: jdbc:mysql://localhost:3306/studentMicro_db?createDatabaseIfNotExist=true
     username: root
@@ -15,17 +17,30 @@ spring:
       hibernate:
         format_sql: true
 
+# =============================
+# Management & Actuator
+# =============================
 management:
   endpoints:
     web:
       exposure:
         include: "*"
 
+# =============================
+# Eureka Client Configuration
+# =============================
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-      
+    register-with-eureka: true  #  Explicit registration
+    fetch-registry: true        # Fetch registry for service discovery
+  instance:
+    prefer-ip-address: true     # Use IP address in registry
+
+# =============================
+# Resilience4j Configuration
+# =============================
 resilience4j:
   circuitbreaker:
     instances:
